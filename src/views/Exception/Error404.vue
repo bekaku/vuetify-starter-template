@@ -23,7 +23,7 @@
             contain
           ></v-img>
 
-          <h1 class="display-3 error--text mb-5 mt-5 font-weight-black">Whoops, 404</h1>
+          <h1 class="display-3 primary--text mb-5 mt-5 font-weight-black">Whoops, 404</h1>
           <p class="mb-5">The page you were looking for does not exist</p>
 
           <v-btn

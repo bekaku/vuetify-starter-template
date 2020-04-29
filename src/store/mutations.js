@@ -1,4 +1,4 @@
-import { MUTATE_CHANGE_LANG, MUTATE_SET_THEME_COLOR } from './storeConfig';
+import { MUTATE_CHANGE_LANG, MUTATE_SET_THEME } from './storeConfig';
 import { LocalStorage } from '../plugins/config'
 import app from '../main';
 const mutations = {
@@ -16,7 +16,7 @@ const mutations = {
         localStorage.setItem(LocalStorage.LANGUGE, payload)
         state.currentLanguge = payload;
     },
-    [MUTATE_SET_THEME_COLOR]:(state, payload)=> {
+    [MUTATE_SET_THEME]:(state, payload)=> {
         state.currentTheme = payload;
         localStorage.setItem(LocalStorage.THEME, JSON.stringify(payload));
     },

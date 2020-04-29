@@ -31,7 +31,7 @@
             <v-icon color="pink" size="18">
               mdi-heart
             </v-icon>
-            by <a href="https://www.facebook.com/bekaku">Bekaku</a> for a better web.
+            by <a class="primary--text" href="https://www.facebook.com/bekaku">Bekaku</a> for a better web.
           </div>
         </v-col>
       </v-row>

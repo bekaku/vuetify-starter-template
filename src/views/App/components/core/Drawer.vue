@@ -27,11 +27,11 @@
   <v-navigation-drawer
     id="core-navigation-drawer"
     v-model="drawer"
-    :color="$vuetify.theme.dark ? 'white' : ''"
-    :dark="$vuetify.theme.dark"
+    :color="currentTheme.barDark || $vuetify.theme.dark ? 'white' : ''"
+    :dark="currentTheme.barDark || $vuetify.theme.dark"
     :expand-on-hover="expandOnHover"
     :right="$vuetify.rtl"
-    :src="themeColor.barImage"
+    :src="currentTheme.barImageShow ? currentTheme.barImage : ''"
     mobile-break-point="960"
     app
     width="260"
@@ -39,7 +39,7 @@
   >
     <template v-slot:img="props">
       <v-img
-        :gradient="!$vuetify.theme.dark ? `to bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)` : barColor"
+        :gradient="currentTheme.barDark || $vuetify.theme.dark ? currentTheme.barColor : `to bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)`"
         v-bind="props"
       />
       <!-- <v-img
@@ -159,8 +159,9 @@
 // Utilities
 import { mapGetters } from "vuex";
 // import  i18n  from '@/plugins/i18n';
+import { getCurrentTheme } from '@/plugins/util'
 import { AppMenus } from "@/plugins/menu";
-import { THEME_COLOR } from "@/store/storeConfig";
+import { THEME } from "@/store/storeConfig";
 export default {
   name: "DashboardCoreDrawer",
   props: {
@@ -174,8 +175,11 @@ export default {
 
   computed: {
     ...mapGetters({
-      themeColor: THEME_COLOR
+      theme : THEME
     }),
+    currentTheme(){
+      return this.theme ? this.theme : getCurrentTheme();
+    },
     drawer: {
       get() {
         return this.$store.state.drawer;

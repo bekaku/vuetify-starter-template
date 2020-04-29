@@ -1,32 +1,17 @@
 <template>
-  <v-container
-    id="user-profile"
-    fluid
-    tag="section"
-  >
+  <v-container id="user-profile" fluid tag="section">
     <v-row justify="center">
-      <v-col
-        cols="12"
-        md="8"
-      >
-        <v-card
-          class="text-center mb-0"
-          v-if="themeSettings"
-        >
+      <v-col cols="12" md="8">
+        <v-card class="text-center mb-0" v-if="themeSettings">
           <v-card-text>
-            <div>
-              <code class="text-left">
-                {{themeSettings}}
-              </code>
+            <div class="mb-3">
+              <code class="text-left">{{ themeSettings }}</code>
             </div>
-            <strong class="mb-3 d-inline-block">SIDEBAR FILTERS</strong>
 
-             <v-item-group v-model="themeSettings.color">
-              <v-item
-                v-for="color in colors"
-                :key="color"
-                :value="color"
-              >
+            <strong class="mb-3 d-inline-block">COLORS FILTERS</strong>
+
+            <v-item-group v-model="themeSettings.color">
+              <v-item v-for="color in colors" :key="color" :value="color">
                 <template v-slot="{ active, toggle }">
                   <v-avatar
                     :class="active && 'v-settings__item--active'"
@@ -37,15 +22,11 @@
                   />
                 </template>
               </v-item>
-            </v-item-group> 
-
+            </v-item-group>
 
             <v-divider class="my-4 secondary" />
 
-            <v-row
-              align="center"
-              no-gutters
-            >
+            <v-row align="center" no-gutters>
               <v-col cols="auto">
                 Dark Mode
               </v-col>
@@ -63,11 +44,8 @@
             </v-row>
 
             <v-divider class="my-4 secondary" />
-
-            <v-row
-              align="center"
-              no-gutters
-            >
+            <strong class="mb-3 d-inline-block">Sidebar</strong>
+            <v-row align="center" no-gutters>
               <v-col cols="auto">
                 Sidebar Image
               </v-col>
@@ -77,6 +55,22 @@
               <v-col cols="auto">
                 <v-switch
                   v-model="themeSettings.barImageShow"
+                  class="ma-0 pa-0"
+                  color="secondary"
+                  hide-details
+                />
+              </v-col>
+            </v-row>
+            <v-row align="center" no-gutters>
+              <v-col cols="auto">
+                Sidebar Dark
+              </v-col>
+
+              <v-spacer />
+
+              <v-col cols="auto">
+                <v-switch
+                  v-model="themeSettings.barDark"
                   class="ma-0 pa-0"
                   color="secondary"
                   hide-details
@@ -104,11 +98,7 @@
                     class="d-inline-block v-settings__item"
                     @click="toggle"
                   >
-                    <v-img
-                      :src="image"
-                      height="100"
-                      width="50"
-                    />
+                    <v-img :src="image" height="100" width="50" />
                   </v-sheet>
                 </template>
               </v-item>
@@ -124,11 +114,9 @@
             >
               Apply
             </v-btn>
-
           </v-card-text>
         </v-card>
       </v-col>
-
     </v-row>
   </v-container>
 </template>
@@ -137,10 +125,12 @@
 // Mixins
 import { mapActions, mapGetters } from "vuex";
 import { ThemeColors } from "@/plugins/config";
-import { MUTATE_SET_THEME_COLOR, THEME_COLOR } from "@/store/storeConfig";
-// import { getCurrentTheme } from '@/plugins/util'
+import { ACTION_SET_THEME, THEME } from "@/store/storeConfig";
+import { getCurrentTheme } from "@/plugins/util";
+import Proxyable from "vuetify/lib/mixins/proxyable";
 export default {
   name: "DashboardCoreSettings",
+  mixins: [Proxyable],
   data: () => ({
     color: "#E91E63",
     colors: ThemeColors,
@@ -155,49 +145,53 @@ export default {
     menu: false,
     saveImage: "",
     showImg: true,
-    // themeSettings: {}
+    themeSettings: {}
   }),
   mounted() {
     //   const currentTheme =this.storeTheme;
     //   Object.freeze( currentTheme );
-    //   this.themeSettings = this.storeTheme;
+    this.themeSettings = getCurrentTheme();
   },
 
   computed: {
     ...mapGetters({
-      storeTheme: THEME_COLOR
-    }),
-     themeSettings: {
-      get() {
-        return this.$store.state.currentTheme;
-      },
-      set(val) {
-        this.$store.commit("MUTATE_SET_THEME_COLOR", val);
-      }
-    },
+      storeTheme: THEME
+    })
   },
 
   methods: {
     ...mapActions({
-      setStoreTheme: MUTATE_SET_THEME_COLOR
+      setStoreTheme: ACTION_SET_THEME
     }),
     onApplyTheme() {
-
+      const self = this;
+      const themeUpdated = self.themeSettings;
+      self.$vuetify.theme.themes.dark.primary = themeUpdated.color;
+      self.$vuetify.theme.themes.light.primary = themeUpdated.color;
+      self.$vuetify.theme.dark = themeUpdated.darkMode;
+      this.setStoreTheme({
+        color: themeUpdated.color,
+        darkMode: themeUpdated.darkMode,
+        barColor: themeUpdated.barColor,
+        barImage: themeUpdated.barImage,
+        barImageShow: themeUpdated.barImageShow,
+        barDark: themeUpdated.barDark
+      });
     }
   }
 };
 </script>
 
 <style lang="sass">
-  .v-settings
-    .v-item-group > *
-      cursor: pointer
+.v-settings
+  .v-item-group > *
+    cursor: pointer
 
-    &__item
-      border-width: 3px
-      border-style: solid
-      border-color: transparent !important
+  &__item
+    border-width: 3px
+    border-style: solid
+    border-color: transparent !important
 
-      &--active
-        border-color: #00cae3 !important
+    &--active
+      border-color: #00cae3 !important
 </style>

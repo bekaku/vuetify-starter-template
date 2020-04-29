@@ -1,8 +1,8 @@
-import {CURRENT_LANGUGE, THEME_COLOR} from './storeConfig';
+import {CURRENT_LANGUGE, THEME} from './storeConfig';
 
 const getters = {
   [CURRENT_LANGUGE]: state => state.currentLanguge,
-  [THEME_COLOR]: state => state.currentTheme,
+  [THEME]: state => state.currentTheme,
 }
 
 export default getters
