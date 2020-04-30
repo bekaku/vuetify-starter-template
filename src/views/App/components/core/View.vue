@@ -1,5 +1,5 @@
 <template>
-  <v-content :class="appBgColor">
+  <v-content>
     <v-breadcrumbs
       v-if="$route.meta.breadcrumb"
       :items="$route.meta.breadcrumb"

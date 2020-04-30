@@ -27,11 +27,11 @@
   <v-navigation-drawer
     id="core-navigation-drawer"
     v-model="drawer"
-    :color="currentTheme.barDark || $vuetify.theme.dark ? 'white' : ''"
+    :color="currentTheme.barDark || $vuetify.theme.dark ? 'white' : undefined"
     :dark="currentTheme.barDark || $vuetify.theme.dark"
     :expand-on-hover="expandOnHover"
     :right="$vuetify.rtl"
-    :src="currentTheme.barImageShow ? currentTheme.barImage : ''"
+    :src="$vuetify.theme.dark || currentTheme.barDark ||currentTheme.barImageShow ? currentTheme.barImage : ''"
     mobile-break-point="960"
     app
     width="260"
@@ -39,21 +39,20 @@
   >
     <template v-slot:img="props">
       <v-img
-        :gradient="currentTheme.barDark || $vuetify.theme.dark ? currentTheme.barColor : `to bottom, rgba(255, 255, 255, .8), rgba(255, 255, 255, .8)`"
+        :gradient="currentTheme.barColor ? currentTheme.barColor : undefined"
         v-bind="props"
       />
+      <!-- <v-img
+        :gradient="currentTheme.barDark || $vuetify.theme.dark ? currentTheme.barColor : `to bottom, rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)`"
+        v-bind="props"
+      /> -->
       <!-- <v-img
         :gradient="`to bottom, ${barColor}`"
         v-bind="props"
       /> -->
     </template>
 
-    <v-divider class="mb-1" />
-
-    <v-list
-      dense
-      nav
-    >
+    <v-list nav>
       <v-list-item>
         <v-list-item-avatar
           class="align-self-center"
@@ -79,46 +78,41 @@
 
     <v-divider class="mb-2" />
 
-    <v-list
-      dense
-      nav
-    >
-      <v-list-item-group color="primary">
-        <div />
+    <v-list nav>
+      <div />
 
-        <div
-          v-for="parentItem in menuItems"
-          :key="parentItem.header"
+      <div
+        v-for="parentItem in menuItems"
+        :key="parentItem.header"
+      >
+        <v-subheader
+          v-if="parentItem.header"
+          class="pl-3 py-4 subtitle-1 text-uppercase"
+        >{{ parentItem.header }}</v-subheader>
+        <v-list-item
+          v-for="(item, i) in parentItem.pages"
+          :key="item.title"
+          link
+          class="mb-0"
+          router
+          :to="item.to"
+          exact
         >
-          <v-subheader
-            v-if="parentItem.header"
-            class="pl-3 py-4 subtitle-1 text-uppercase"
-          >{{ parentItem.header }}</v-subheader>
-          <v-list-item
-            v-for="(item, i) in parentItem.pages"
-            :key="item.title"
-            link
-            class="mb-0"
-            router
-            :to="item.to"
-            exact
+          <v-list-item-icon v-if="parentItem.header !== 'Subscriptions'">
+            <v-icon>{{ item.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-avatar
+            v-else
+            class="mr-5"
           >
-            <v-list-item-icon v-if="parentItem.header !== 'Subscriptions'">
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-            <v-list-item-avatar
-              v-else
-              class="mr-5"
-            >
-              <img :src="`https://randomuser.me/api/portraits/men/${i}.jpg`" />
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title class=" font-weight-medium subtitle-2">
-                {{item.i18n ? $t(item.title) : item.title}}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </div>
-      </v-list-item-group>
+            <img :src="`https://randomuser.me/api/portraits/men/${i}.jpg`" />
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title class=" font-weight-medium subtitle-2">
+              {{item.i18n ? $t(item.title) : item.title}}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </div>
       <v-divider class="mt-2 mb-2"></v-divider>
       <div />
     </v-list>
@@ -159,7 +153,7 @@
 // Utilities
 import { mapGetters } from "vuex";
 // import  i18n  from '@/plugins/i18n';
-import { getCurrentTheme } from '@/plugins/util'
+import { getCurrentTheme } from "@/plugins/util";
 import { AppMenus } from "@/plugins/menu";
 import { THEME } from "@/store/storeConfig";
 export default {
@@ -175,9 +169,9 @@ export default {
 
   computed: {
     ...mapGetters({
-      theme : THEME
+      theme: THEME
     }),
-    currentTheme(){
+    currentTheme() {
       return this.theme ? this.theme : getCurrentTheme();
     },
     drawer: {

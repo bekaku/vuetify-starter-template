@@ -32,7 +32,7 @@
   opacity: 0
 
 .v-btn:not(.v-btn--text):not(.v-btn--outlined):focus:before
-    opacity: 0
+  opacity: 0
 
 .v-btn.v-size--default:not(.v-btn--icon):not(.v-btn--fab),
 .v-btn.v-size--large:not(.v-btn--icon):not(.v-btn--fab)
@@ -49,19 +49,42 @@
     opacity: 1
 
 .v-btn-toggle > .v-btn.v-size--default
-   height: inherit
+  height: inherit
+
+.theme--light.v-btn
+  &.default
+    background-color: #ffffff !important
+    color: #000000 !important
+  &.primary
+    background-color: #00D1B2 !important
+    color: #ffffff !important
+  &.secondary
+    background-color: #3273DC !important
+    color: #ffffff !important
+  &.success
+    background-color: #23D160 !important
+    color: #ffffff !important
+  &.warning
+    background-color: #FF9F43 !important
+    color: #ffffff !important
+  &.error
+    background-color: #FF3860 !important
+    color: #ffffff !important
+  &.info
+    background-color: #209CEE !important
+    color: #ffffff !important
 
 .theme--light.v-btn-toggle .v-btn.v-btn
   border-color: #999 !important
   &.primary
-    border-color: #e91e63 !important
+    border-color: #00D1B2 !important
   &.secondary
-    border-color: #9c27b0 !important
+    border-color: #424242 !important
   &.success
-    border-color: #4caf50 !important
+    border-color: #23D160 !important
   &.warning
-    border-color: #fb8c00 !important
+    border-color: #FF9F43 !important
   &.error
-    border-color: #ff5252 !important
+    border-color: #FF3860 !important
   &.info
-    border-color: #00cae3 !important
+    border-color: #209CEE !important

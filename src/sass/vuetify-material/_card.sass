@@ -2,6 +2,7 @@
   border-radius: 6px
   margin-top: 30px
   margin-bottom: 15px
+  padding: 6px
 
   .card-title
     font-size: 18px
@@ -24,8 +25,8 @@
     .display-2
       font-size: 18px !important
 
-  .v-divider
-    border-color: #eee
+  // .v-divider
+  //   border-color: $border-color-base
 
   .ct-label
     font-size: 14px
@@ -43,19 +44,29 @@
     border-radius: 6px
 
 .v-card__title
+  color: $headings-color !important
   font-size: 18px
   padding-top: 7px
   padding-bottom: 2px
 
+.v-card__subtitle
+  color: $text-muted !important
+  
+.v-card__text
+  line-height: $line-height-base
+
 .theme--light
   .v-card > .v-card__text
-    color: #333
+    // color: #333
+    color: $content-color
   .card-title
     color: #3c4858
 
 .theme--dark
+  .v-card__title
+    color: #fff !important
   .card-title
-    color: #fff
+    color: #fff !important
 
 
 .v-timeline-item .v-card

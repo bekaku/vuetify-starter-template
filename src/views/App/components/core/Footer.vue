@@ -13,7 +13,8 @@
         >
           <a
             :href="link.href"
-            class="mr-0 grey--text text--darken-3"
+            class="mr-0 grey--text"
+            :class="$vuetify.theme.dark ? 'text--lighten-3' : 'text--darken-3'"
             rel="noopener"
             target="_blank"
             v-text="link.text"
@@ -44,7 +45,7 @@
         bottom
         right
         large
-        color="rgba(0, 0, 0, .5)"
+        :color="!$vuetify.theme.dark ? 'rgba(0, 0, 0, .5)' : 'rgba(255, 255, 255, .5)'"
         @click="toTop"
       >
         <v-icon color="white">mdi-chevron-up</v-icon>

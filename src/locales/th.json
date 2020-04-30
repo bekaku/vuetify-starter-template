@@ -117,7 +117,7 @@
     "profileData": "ข้อมูลส่วนตัว",
     "darkMode": "โหมดมืด",
     "lightMode": "โหมดสว่าง",
-    "colorTheme": "ธีม"
+    "themes": "ธีม"
   },
   "error": {
     "emailFormat": "อีเมล์ไม่ถูกต้อง",

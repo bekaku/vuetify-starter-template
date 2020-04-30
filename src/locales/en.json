@@ -117,7 +117,7 @@
     "profileData": "Profile data",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
-    "colorTheme": "Color themes"
+    "themes": "Themes"
   },
   "error": {
     "emailFormat": "Invalid E-mail address",

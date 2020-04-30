@@ -52,6 +52,21 @@ export default new Router({
           path: 'components/typography',
           component: () => import('@/views/App/component/Typography'),
         },
+        {
+          name: 'Buttons',
+          path: 'components/buttons',
+          component: () => import('@/views/App/component/Buttons'),
+        },
+        {
+          name: 'Grids',
+          path: 'components/grids',
+          component: () => import('@/views/App/component/Grid'),
+        },
+        {
+          name: 'Tabs',
+          path: 'components/tabs',
+          component: () => import('@/views/App/component/Tabs'),
+        },
         // Tables
         {
           name: 'Regular Tables',
@@ -78,9 +93,9 @@ export default new Router({
           meta: {
             breadcrumb: [
               { text: 'nav.dashboard', href: '/', disabled: false, i18n: true },
-              { text: 'nav.colorTheme', href: '', disabled: true, i18n: true },
+              { text: 'nav.themes', href: '', disabled: true, i18n: true },
             ],
-            pageTitle: { text: 'nav.colorTheme', i18n: true },
+            pageTitle: { text: 'nav.themes', i18n: true },
           }
         },
       ],

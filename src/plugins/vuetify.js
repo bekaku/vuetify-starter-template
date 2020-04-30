@@ -7,7 +7,7 @@ Vue.use(Vuetify)
 const currentTheme = getCurrentTheme()
 const theme = {
   primary: currentTheme.color ? currentTheme.color : '#00D1B2',
-  secondary: '#424242',
+  secondary: '#3273DC',
   accent: '#3273DC',
   error: '#FF3860',
   info: '#209CEE',

@@ -1,22 +1,37 @@
 <template>
-  <v-container id="user-profile" fluid tag="section">
-    <v-row justify="center">
-      <v-col cols="12" md="8">
-        <v-card class="text-center mb-0" v-if="themeSettings">
+  <v-container
+    id="theme-settings"
+    fluid
+    tag="section"
+  >
+    <base-v-component
+      heading="Simple Tables"
+      link="components/simple-tables"
+    />
+
+    <v-row>
+      <v-col cols="12">
+        <v-card
+          v-if="themeSettings"
+        >
           <v-card-text>
             <div class="mb-3">
               <code class="text-left">{{ themeSettings }}</code>
             </div>
 
-            <strong class="mb-3 d-inline-block">COLORS FILTERS</strong>
+            <strong class="mb-3 d-inline-block">Theme Colors</strong>
 
             <v-item-group v-model="themeSettings.color">
-              <v-item v-for="color in colors" :key="color" :value="color">
+              <v-item
+                v-for="color in colors"
+                :key="color"
+                :value="color"
+              >
                 <template v-slot="{ active, toggle }">
                   <v-avatar
                     :class="active && 'v-settings__item--active'"
                     :color="color"
-                    class="v-settings__item"
+                    class="v-settings__item ml-1"
                     size="25"
                     @click="toggle"
                   />
@@ -24,9 +39,10 @@
               </v-item>
             </v-item-group>
 
-            <v-divider class="my-4 secondary" />
+            <v-divider class="my-4" />
 
-            <v-row align="center" no-gutters>
+            <v-row
+            >
               <v-col cols="auto">
                 Dark Mode
               </v-col>
@@ -37,15 +53,14 @@
                 <v-switch
                   v-model="themeSettings.darkMode"
                   class="ma-0 pa-0"
-                  color="secondary"
                   hide-details
                 />
               </v-col>
             </v-row>
-
-            <v-divider class="my-4 secondary" />
+            <v-divider class="my-4" />
             <strong class="mb-3 d-inline-block">Sidebar</strong>
-            <v-row align="center" no-gutters>
+            <v-row
+            >
               <v-col cols="auto">
                 Sidebar Image
               </v-col>
@@ -56,12 +71,12 @@
                 <v-switch
                   v-model="themeSettings.barImageShow"
                   class="ma-0 pa-0"
-                  color="secondary"
                   hide-details
                 />
               </v-col>
             </v-row>
-            <v-row align="center" no-gutters>
+            <v-row
+            >
               <v-col cols="auto">
                 Sidebar Dark
               </v-col>
@@ -72,19 +87,16 @@
                 <v-switch
                   v-model="themeSettings.barDark"
                   class="ma-0 pa-0"
-                  color="secondary"
                   hide-details
                 />
               </v-col>
             </v-row>
 
-            <v-divider class="my-4 secondary" />
-
-            <strong class="mb-3 d-inline-block">IMAGES</strong>
+            <strong class="mb-3 d-inline-block">Images</strong>
 
             <v-item-group
               v-model="themeSettings.barImage"
-              class="d-flex justify-space-between mb-3"
+              class="mb-3"
             >
               <v-item
                 v-for="image in images"
@@ -98,11 +110,46 @@
                     class="d-inline-block v-settings__item"
                     @click="toggle"
                   >
-                    <v-img :src="image" height="100" width="50" />
+                    <v-img
+                      :src="image"
+                      height="100"
+                      width="50"
+                    />
                   </v-sheet>
                 </template>
               </v-item>
             </v-item-group>
+
+            <strong class="mb-3 d-inline-block">Barcolor</strong>
+            <v-item-group
+              v-model="themeSettings.barColor"
+              class="mb-3"
+            >
+              <v-item
+                v-for="barColor in barColors"
+                :key="barColor"
+                :value="barColor"
+                class="mx-1"
+              >
+                <template v-slot="{ active, toggle }">
+                  <v-sheet
+                    :class="active && 'v-settings__item--active'"
+                    class="d-inline-block v-settings__item"
+                    @click="toggle"
+                  >
+                    <div :style="`background-image: url('${themeSettings.barImage}');background-size: cover;height:100px;width:50px;background-repeat: no-repeat`">
+
+                      <div :style="`background-image: linear-gradient(${barColor});height:100px;width:50px;`">
+                      </div>
+                    </div>
+
+                  </v-sheet>
+                </template>
+              </v-item>
+            </v-item-group>
+
+            <v-divider class="my-4" />
+            <strong class="mb-3 d-inline-block">Navbar</strong>
 
             <v-btn
               block
@@ -134,13 +181,26 @@ export default {
   data: () => ({
     color: "#E91E63",
     colors: ThemeColors,
-    image:
-      "https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg",
+    barColors: [
+      "to bottom, rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)",
+      "to bottom, rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)",
+      "to bottom, #bdc3c7, #2c3e50",
+      "to bottom, #c6ffdd, #fbd786, #f7797d",
+      "to bottom, #659999, #f4791f",
+      "to top, #dd3e54, #6be585",
+      "to top, #009fff, #ec2f4b",
+      "to bottom, #108dc7, #ef8e38",
+      "to bottom, #ff4b1f, #1fddff",
+      "to bottom, #114357, #f29492",
+      "to bottom, #feac5e, #c779d0, #4bc0c8",
+      
+    ],
     images: [
-      "https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg",
-      "https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-2.jpg",
-      "https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-3.jpg",
-      "https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-4.jpg"
+      "https://images.pexels.com/photos/3879062/pexels-photo-3879062.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "https://images.pexels.com/photos/2987769/pexels-photo-2987769.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "https://images.pexels.com/photos/4064432/pexels-photo-4064432.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "https://images.pexels.com/photos/1769369/pexels-photo-1769369.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+      "https://images.pexels.com/photos/2182863/pexels-photo-2182863.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260"
     ],
     menu: false,
     saveImage: "",
@@ -156,7 +216,7 @@ export default {
   computed: {
     ...mapGetters({
       storeTheme: THEME
-    })
+    }),
   },
 
   methods: {

@@ -48,13 +48,31 @@ export const AppMenus = () => {
                     to: "/components/notifications"
                 },
                 {
+                    title: "buttons",
+                    i18n: false,
+                    icon: "mdi-minus",
+                    to: "/components/buttons"
+                },
+                {
+                    title: "grids",
+                    i18n: false,
+                    icon: "mdi-grid",
+                    to: "/components/grids"
+                },
+                {
+                    title: "tabs",
+                    i18n: false,
+                    icon: "mdi-tab",
+                    to: "/components/tabs"
+                },
+                {
                     title: "signin",
                     i18n: false,
                     icon: "mdi-login",
                     to: "/auth/login"
                 },
                 {
-                    title: "nav.colorTheme",
+                    title: "nav.themes",
                     i18n: true,
                     icon: "mdi-brush",
                     to: "/settings/theme"

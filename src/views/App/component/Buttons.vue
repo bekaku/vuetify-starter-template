@@ -27,7 +27,7 @@
                 v-for="(color, i) in colors"
                 :key="i"
                 elevation="1"
-                :color="color === 'default' ? undefined : color"
+                :color="color"
                 class="ma-1"
               >
                 {{ color }}
@@ -48,25 +48,10 @@
 
             <div>
               <v-btn
-                v-for="(dir, i) in ['left', 'right']"
-                :key="i"
-                elevation="1"
-                class="ma-1"
-              >
-                <v-icon
-                  :left="dir === 'left'"
-                  :right="dir === 'right'"
-                  :class="dir === 'right' && 'order-last'"
-                  v-text="icons[dir]"
-                />
-                {{ dir }}
-              </v-btn>
-
-              <v-btn
-                v-for="(color, i) in colors.slice(2)"
+                v-for="(color, i) in colors"
                 :key="`btn-${i}`"
                 elevation="1"
-                :color="color === 'default' ? undefined : color"
+                :color="color"
                 class="ma-1"
               >
                 <v-icon
@@ -202,6 +187,7 @@
                 <v-btn
                   v-for="dir in ['left', 'middle', 'right']"
                   :key="dir"
+                  color="default"
                 >
                   {{ dir }}
                 </v-btn>
@@ -217,6 +203,7 @@
               <v-btn
                 v-for="n in 4"
                 :key="n"
+                color="default"
               >
                 {{ n }}
               </v-btn>
@@ -231,6 +218,7 @@
               <v-btn
                 v-for="n in 3"
                 :key="n"
+                color="default"
               >
                 {{ n + 4 }}
               </v-btn>
@@ -355,6 +343,7 @@
 
     data: () => ({
       colors: [
+        'primary',
         'default',
         'secondary',
         'info',
@@ -363,9 +352,10 @@
         'error',
       ],
       icons: {
-        left: 'mdi-chevron-left',
-        right: 'mdi-chevron-right',
+        default: 'mdi-chevron-left',
+        primary: 'mdi-chevron-up',
         info: 'mdi-exclamation',
+        secondary: 'mdi-exclamation',
         success: 'mdi-check',
         warning: 'mdi-alert',
         error: 'mdi-close',
@@ -402,24 +392,9 @@
           text: 'View on Youtube',
         },
         {
-          color: '#35465C',
-          icon: 'mdi-tumblr',
-          text: 'Repost',
-        },
-        {
           color: '#333333',
-          icon: 'mdi-github-circle',
+          icon: 'mdi-github',
           text: 'Connect with Github',
-        },
-        {
-          color: '#1769FF',
-          icon: 'mdi-behance',
-          text: 'Follow Us',
-        },
-        {
-          color: '#EA4C89',
-          icon: 'mdi-dribbble',
-          text: 'Follow us on Dribbble',
         },
         {
           color: '#FF4500',
