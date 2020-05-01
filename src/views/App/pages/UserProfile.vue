@@ -124,7 +124,7 @@
                   class="text-right"
                 >
                   <v-btn
-                    color="success"
+                    color="default"
                     class="mr-0"
                   >
                     Update Profile

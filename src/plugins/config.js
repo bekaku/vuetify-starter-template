@@ -16,6 +16,8 @@ export const DefaultTheme = {
     barImage: 'https://demos.creative-tim.com/material-dashboard/assets/img/sidebar-1.jpg',
     barDark : true,
     barImageShow : true,
+    barExpandOnHover : true,
+    navDark : true,
 };
 export const ThemeColors = [
     '#008bf2',

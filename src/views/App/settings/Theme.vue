@@ -62,7 +62,7 @@
             <v-row
             >
               <v-col cols="auto">
-                Sidebar Image
+                Sidebar Image/Gradient
               </v-col>
 
               <v-spacer />
@@ -86,6 +86,22 @@
               <v-col cols="auto">
                 <v-switch
                   v-model="themeSettings.barDark"
+                  class="ma-0 pa-0"
+                  hide-details
+                />
+              </v-col>
+            </v-row>
+            <v-row
+            >
+              <v-col cols="auto">
+                Sidebar ExpandOnHover
+              </v-col>
+
+              <v-spacer />
+
+              <v-col cols="auto">
+                <v-switch
+                  v-model="themeSettings.barExpandOnHover"
                   class="ma-0 pa-0"
                   hide-details
                 />
@@ -120,7 +136,7 @@
               </v-item>
             </v-item-group>
 
-            <strong class="mb-3 d-inline-block">Barcolor</strong>
+            <strong class="mb-3 d-inline-block">Bargradient</strong>
             <v-item-group
               v-model="themeSettings.barColor"
               class="mb-3"
@@ -150,6 +166,25 @@
 
             <v-divider class="my-4" />
             <strong class="mb-3 d-inline-block">Navbar</strong>
+             <v-row
+            >
+              <v-col cols="auto">
+                Navbar dark
+              </v-col>
+
+              <v-spacer />
+
+
+              <v-col cols="auto">
+                <v-switch
+                  v-model="themeSettings.navDark"
+                  class="ma-0 pa-0"
+                  hide-details
+                />
+              </v-col>
+            </v-row>
+            <v-divider class="my-4" />
+
 
             <v-btn
               block
@@ -184,16 +219,35 @@ export default {
     barColors: [
       "to bottom, rgba(0, 0, 0, .7), rgba(0, 0, 0, .7)",
       "to bottom, rgba(255, 255, 255, .7), rgba(255, 255, 255, .7)",
-      "to bottom, #bdc3c7, #2c3e50",
-      "to bottom, #c6ffdd, #fbd786, #f7797d",
+      "to top, #bdc3c7, #2c3e50",
+      "to bottom, #be93c5, #7bc6cc",
       "to bottom, #659999, #f4791f",
-      "to top, #dd3e54, #6be585",
+      "to bottom, #dd3e54, #6be585",
       "to top, #009fff, #ec2f4b",
       "to bottom, #108dc7, #ef8e38",
       "to bottom, #ff4b1f, #1fddff",
       "to bottom, #114357, #f29492",
-      "to bottom, #feac5e, #c779d0, #4bc0c8",
-      
+      "to top, #feac5e, #c779d0, #4bc0c8",
+      "to bottom, #141e30, #243b55",
+      "to bottom, #2c3e50, #4ca1af",
+      "to top, #4b79a1, #283e51",
+      "to bottom, #136a8a, #267871",
+      "to bottom, #485563, #29323c",
+      "to bottom, #614385, #516395",
+      "to bottom, #4cb8c4, #3cd3ad",
+      "to bottom, #a18cd1 0%, #fbc2eb 100%",
+      "135deg, #667eea 0%, #764ba2 100%",
+      "to bottom, #0ba360 0%, #3cba92 100%",
+      "to top, #00c6fb 0%, #005bea 100%",
+      "to top, #434343 0%, black 100%",
+      "to right, #868f96 0%, #596164 100%",
+      "to top, #09203f 0%, #537895 100%",
+      "to top, #3ab5b0 0%, #3d99be 31%, #56317a 100%",
+      "-20deg, #fc6076 0%, #ff9a44 100%",
+      "to bottom, #323232 0%, #3F3F3F 40%, #1C1C1C 150%",
+      "-225deg, #AC32E4 0%, #7918F2 48%, #4801FF 100%",
+      "-225deg, #A445B2 0%, #D41872 52%, #FF0066 100%",
+      "315deg, #537895 0%, #09203f 74%"
     ],
     images: [
       "https://images.pexels.com/photos/3879062/pexels-photo-3879062.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
@@ -235,7 +289,9 @@ export default {
         barColor: themeUpdated.barColor,
         barImage: themeUpdated.barImage,
         barImageShow: themeUpdated.barImageShow,
-        barDark: themeUpdated.barDark
+        barDark: themeUpdated.barDark,
+        barExpandOnHover: themeUpdated.barExpandOnHover,
+        navDark: themeUpdated.navDark
       });
     }
   }

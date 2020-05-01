@@ -13,7 +13,7 @@
         :href="`https://vuetifyjs.com/${link}`"
         rel="noopener"
         target="_blank"
-        class="secondary--text"
+        class="primary--text"
         style="text-decoration:none;"
       >
         full documentation
