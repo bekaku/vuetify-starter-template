@@ -387,6 +387,9 @@
 </template>
 
 <script>
+//service
+import AppService from "@/api/AppService";
+const appService = new AppService();
 export default {
   name: "DashboardDashboard",
 
@@ -606,6 +609,18 @@ export default {
   methods: {
     complete(index) {
       this.list[index] = !this.list[index];
+    },
+
+    async fetchData() {
+      const self = this;
+      self.loading = false;
+      let data;
+      try {
+        data = await appService.getTestData();
+      } catch (error) {
+        console.log(error.message);
+      }
+      console.log(data);
     }
   }
 };
