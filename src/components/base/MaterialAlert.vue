@@ -2,15 +2,13 @@
   <v-alert
     v-bind="$attrs"
     class="v-alert--material"
-    dark
+    :dark="dark"
+    :text="text"
     v-on="$listeners"
   >
-    <template
-      v-if="$attrs.icon"
-      v-slot:prepend
-    >
+    <template v-if="$attrs.icon" v-slot:prepend>
       <v-icon
-        class="v-alert__icon elevation-6 white"
+        class="v-alert__icon elevation-0 white"
         light
         :color="$attrs.color"
       >
@@ -20,10 +18,7 @@
 
     <slot />
 
-    <template
-      v-if="$attrs.dismissible"
-      v-slot:close="{ toggle }"
-    >
+    <template v-if="$attrs.dismissible" v-slot:close="{ toggle }">
       <v-btn
         :aria-label="$vuetify.lang.t('$vuetify.close')"
         color
@@ -40,21 +35,31 @@
 </template>
 
 <script>
-  export default {
-    name: 'MaterialAlert',
+export default {
+  name: "MaterialAlert",
+  props: {
+    dark: {
+      type: Boolean,
+      default: true
+    },
+     text: {
+      type: Boolean,
+      default: false
+    }
   }
+};
 </script>
 
 <style lang="sass">
 
-  .v-alert--material
-    margin-top: 32px
+.v-alert--material
+  margin-top: 32px
 
-    .v-alert__icon
-      top: -36px
+  .v-alert__icon
+    // top: -36px
 
-    .v-alert__dismissible
-      align-self: flex-start
-      margin: 0 !important
-      padding: 0 !important
+  .v-alert__dismissible
+    align-self: flex-start
+    margin: 0 !important
+    padding: 0 !important
 </style>

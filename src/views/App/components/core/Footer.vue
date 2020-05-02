@@ -1,5 +1,5 @@
 <template>
-  <v-footer id="dashboard-core-footer">
+  <v-footer id="dashboard-core-footer" :dark="dark" :absolute="absolute" :class="bg">
     <v-container>
       <v-row
         align="center"
@@ -14,7 +14,7 @@
           <a
             :href="link.href"
             class="mr-0 grey--text"
-            :class="$vuetify.theme.dark ? 'text--lighten-3' : 'text--darken-3'"
+            :class="$vuetify.theme.dark || dark ? 'text--lighten-3' : 'text--darken-3'"
             rel="noopener"
             target="_blank"
             v-text="link.text"
@@ -28,7 +28,7 @@
           md="auto"
         >
           <div class="body-1 font-weight-light pt-6 pt-md-0 text-center">
-            &copy; 2020, made with
+            &copy; {{ new Date().getFullYear() }}, made with
             <v-icon color="pink" size="18">
               mdi-heart
             </v-icon>
@@ -38,6 +38,7 @@
       </v-row>
 
       <v-btn
+        v-if="showToTop"
         v-scroll="onScroll"
         v-show="fab"
         fab
@@ -56,7 +57,26 @@
 
 <script>
 export default {
+  props: {
+    dark: {
+      type: Boolean,
+      default:false 
+    },
+    absolute: {
+      type : Boolean,
+      default : false
+    },
+    bg:{
+      type : String,
+      default : ''
+    },
+    showToTop:{
+      type : Boolean,
+      default : true
+    }
+  },
   name: "DashboardCoreFooter",
+  
 
   data: () => ({
     fab: false,

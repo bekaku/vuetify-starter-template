@@ -79,12 +79,6 @@ export default new Router({
           path: 'maps/google-maps',
           component: () => import('@/views/App/maps/GoogleMaps'),
         },
-        // Upgrade
-        {
-          name: 'Upgrade',
-          path: 'upgrade',
-          component: () => import('@/views/App/Upgrade'),
-        },
         //setting
         {
           name: 'Theme Settings',

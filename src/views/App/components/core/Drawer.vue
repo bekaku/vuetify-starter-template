@@ -1,13 +1,23 @@
 <template>
-<!-- :color="currentTheme.barDark ? 'white' : undefined" -->
+  <!-- :color="currentTheme.barDark ? 'white' : undefined" -->
   <v-navigation-drawer
-  id="core-navigation-drawer"
+    id="core-navigation-drawer"
     v-model="drawer"
-    :color="currentTheme.barImageShow && !$vuetify.theme.dark ? 'white' : (currentTheme.barDark && !$vuetify.theme.dark ? currentTheme.color : undefined)"
+    :color="
+      currentTheme.barImageShow && !$vuetify.theme.dark
+        ? 'white'
+        : currentTheme.barDark && !$vuetify.theme.dark
+        ? currentTheme.color
+        : undefined
+    "
     :dark="currentTheme.barDark || $vuetify.theme.dark"
     :expand-on-hover="currentTheme.barExpandOnHover"
     :right="$vuetify.rtl"
-    :src="!$vuetify.theme.dark && currentTheme.barImageShow ? currentTheme.barImage : ''"
+    :src="
+      !$vuetify.theme.dark && currentTheme.barImageShow
+        ? currentTheme.barImage
+        : ''
+    "
     mobile-break-point="960"
     app
     width="260"
@@ -16,7 +26,9 @@
     <template v-slot:img="props">
       <v-img
         :gradient="
-          !$vuetify.theme.dark && currentTheme.barImageShow && currentTheme.barColor
+          !$vuetify.theme.dark &&
+          currentTheme.barImageShow &&
+          currentTheme.barColor
             ? currentTheme.barColor
             : undefined
         "
@@ -24,7 +36,7 @@
       />
     </template>
 
-    <v-list dense nav class="py-0">
+    <v-list dense>
       <v-list-item two-line class="px-0">
         <v-list-item-avatar>
           <v-icon>mdi-vimeo</v-icon>
@@ -37,43 +49,95 @@
       </v-list-item>
 
       <v-divider></v-divider>
-      <div v-for="parentItem in menuItems" :key="parentItem.header">
+      <div v-for="groupItem in menuItems" :key="groupItem.header">
         <v-subheader
-          v-if="!currentTheme.barExpandOnHover && parentItem.header"
+          v-if="!currentTheme.barExpandOnHover && groupItem.header"
           class="pl-3 py-4 subtitle-1 text-uppercase"
-          >{{ parentItem.header }}</v-subheader
+          >{{ groupItem.header }}</v-subheader
         >
-        <v-list-item
-          v-for="(item, i) in parentItem.pages"
-          :key="`drawer-item-${i}`"
-          link
-          class="mb-0"
-          router
-          :to="item.to"
-          exact
-        >
-          <v-list-item-icon>
-            <v-icon>{{ item.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>
-              {{ item.i18n ? $t(item.title) : item.title }}</v-list-item-title
+        <template v-for="(parentItem, i) in groupItem.pages">
+          <template v-if="parentItem.items">
+            <v-list-group
+              :key="`parent-${i}-${parentItem.title}`"
+              :prepend-icon="parentItem.icon"
+              no-action
+              :color="
+                currentTheme.barDark || $vuetify.theme.dark ? 'white' : ''
+              "
             >
-          </v-list-item-content>
-        </v-list-item>
-      </div>
+              <template v-slot:activator>
+                <v-list-item-content>
+                  <v-list-item-title
+                    v-text="parentItem.title"
+                  ></v-list-item-title>
+                </v-list-item-content>
+              </template>
 
-      <v-divider class="mt-2 mb-2"></v-divider>
+              <v-list-item
+                v-for="(subItem, subI) in parentItem.items"
+                :key="`parent-${i}-drawer-item-${subI}`"
+                link
+                :to="subItem.to"
+              >
+                <v-list-item-action v-if="subItem.icon">
+                  <v-icon>{{ subItem.icon }}</v-icon>
+                </v-list-item-action>
+                <v-list-item-content>
+                  <v-list-item-title>
+                    {{
+                      subItem.i18n ? $t(subItem.title) : subItem.title
+                    }}
+                  </v-list-item-title>
+                </v-list-item-content>
+              </v-list-item>
+            </v-list-group>
+          </template>
+          <template v-else>
+            <v-list-item
+              :key="`drawer-item-${i}`"
+              link
+              class="mb-0"
+              router
+              :to="parentItem.to"
+              exact
+            >
+              <v-list-item-icon>
+                <v-icon>{{ parentItem.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>
+                  {{
+                    parentItem.i18n ? $t(parentItem.title) : parentItem.title
+                  }}</v-list-item-title
+                >
+              </v-list-item-content>
+            </v-list-item>
+          </template>
+        </template>
+      </div>
     </v-list>
 
     <template v-slot:append>
-      <base-item
-        :item="{
-          title: $t('base.setting'),
-          icon: 'mdi-package-up',
-          to: '/upgrade'
-        }"
-      />
+      <v-row no-gutters class="my-5">
+        <v-col cols="8" class="pl-1"
+          ><v-text-field
+            hide-details
+            :placeholder="$t('base.search')"
+            filled
+            rounded
+            dense
+            prepend-inner-icon="mdi-magnify"
+          ></v-text-field
+        ></v-col>
+        <v-col cols="4" class="text-center ">
+          <v-btn icon class="mr-1">
+            <v-icon>mdi-cog</v-icon>
+          </v-btn>
+          <v-btn icon>
+            <v-icon>mdi-share-variant</v-icon>
+          </v-btn>
+        </v-col>
+      </v-row>
     </template>
   </v-navigation-drawer>
 </template>
@@ -129,60 +193,3 @@ export default {
   }
 };
 </script>
-
-<style lang="sass">
-@import '~vuetify/src/styles/tools/_rtl.sass'
-
-#core-navigation-drawer
-  .v-list-group__header.v-list-item--active:before
-    opacity: .24
-
-  .v-list-item
-    &__icon--text,
-    &__icon:first-child
-      justify-content: center
-      text-align: center
-      width: 20px
-
-      +ltr()
-        // margin-right: 24px
-        // margin-left: 12px !important
-
-      +rtl()
-        // margin-left: 24px
-        // margin-right: 12px !important
-
-  .v-list--dense
-    .v-list-item
-      &__icon--text,
-      &__icon:first-child
-        margin-top: 10px
-
-  .v-list-group--sub-group
-    .v-list-item
-      +ltr()
-        padding-left: 8px
-
-      +rtl()
-        padding-right: 8px
-
-    .v-list-group__header
-      +ltr()
-        padding-right: 0
-
-      +rtl()
-        padding-right: 0
-
-      .v-list-item__icon--text
-        margin-top: 19px
-        order: 0
-
-      .v-list-group__header__prepend-icon
-        order: 2
-
-        +ltr()
-          margin-right: 8px
-
-        +rtl()
-          margin-left: 8px
-</style>

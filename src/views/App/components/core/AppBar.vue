@@ -5,7 +5,9 @@
     :color="
       currentTheme.navDark && !$vuetify.theme.dark
         ? currentTheme.color
-        : (!$vuetify.theme.dark ? 'white' : '')
+        : !$vuetify.theme.dark
+        ? 'white'
+        : ''
     "
     :dark="currentTheme.navDark || $vuetify.theme.dark"
     flat
@@ -32,23 +34,15 @@
       "
     /> -->
     <v-spacer />
-
-    <!-- <v-text-field :label="$t('base.search')" color="secondary" hide-details>
-      <template v-if="$vuetify.breakpoint.mdAndUp" v-slot:append-outer>
-        <v-btn class="mt-n2" icon>
-          <v-icon>mdi-magnify</v-icon>
-        </v-btn>
-      </template>
-    </v-text-field> -->
-    <v-text-field hide-details
-            :placeholder="$t('base.search')"
-           filled
-            rounded
-            dense
-            prepend-inner-icon="mdi-magnify"
-          ></v-text-field>
-
-    <div class="mx-3" />
+    <v-text-field
+      hide-details
+      :placeholder="$t('base.search')"
+      filled
+      rounded
+      dense
+      prepend-inner-icon="mdi-magnify"
+    ></v-text-field>
+    <v-spacer />
 
     <v-btn class="ml-2" min-width="0" icon to="/">
       <v-icon>mdi-view-dashboard</v-icon>
@@ -98,38 +92,38 @@
         </v-btn>
       </template>
 
-        <v-list dense class="py-0">
-          <v-list-item
-            two-line
-            v-for="(n, i) in notifications"
-            :key="`notifications-${i}`"
-            href="/"
-          >
-            <v-list-item-avatar>
-              <v-img
-                :src="'https://cdn.vuetifyjs.com/images/lists/1.jpg'"
-              ></v-img>
-            </v-list-item-avatar>
-            <v-list-item-content>
-              <v-list-item-title>Bekaku</v-list-item-title>
-              <v-list-item-subtitle v-text="n" />
-            </v-list-item-content>
-          </v-list-item>
+      <v-list dense class="py-0">
+        <v-list-item
+          two-line
+          v-for="(n, i) in notifications"
+          :key="`notifications-${i}`"
+          href="/"
+        >
+          <v-list-item-avatar>
+            <v-img
+              :src="'https://cdn.vuetifyjs.com/images/lists/1.jpg'"
+            ></v-img>
+          </v-list-item-avatar>
+          <v-list-item-content>
+            <v-list-item-title>Bekaku</v-list-item-title>
+            <v-list-item-subtitle v-text="n" />
+          </v-list-item-content>
+        </v-list-item>
 
-          <v-divider />
-          <v-list-item class="mt-1" href="/">
-            <v-list-item-content class="text-center">
-              <v-list-item-title class="primary--text">More</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </v-list>
+        <v-divider />
+        <v-list-item class="mt-1" href="/">
+          <v-list-item-content class="text-center">
+            <v-list-item-title class="primary--text">More</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </v-list>
     </v-menu>
     <!-- End  -->
 
     <!-- User Avatar  -->
     <v-menu offset-y left>
       <template v-slot:activator="{ on }">
-        <v-btn icon v-on="on">
+        <v-btn icon v-on="on" class="mr-5">
           <v-avatar depressed size="36px">
             <img
               src="https://scontent.fbkk8-3.fna.fbcdn.net/v/t1.0-9/s960x960/93841626_3211504378913659_8368286881930018816_o.jpg?_nc_cat=111&_nc_sid=85a577&_nc_eui2=AeEgZaAfNvIPNGSsg7XojvQpQWFwliA533VBYXCWIDnfddcJOyVLT3z4K36dd6zT1XbI4n4M9OYfU5ev3-C86Lwa&_nc_ohc=l6kjpuLUPc8AX_oiFs-&_nc_ht=scontent.fbkk8-3.fna&_nc_tp=7&oh=d07f410957c7e0b61fab785a1a8bdce2&oe=5ECD414A"

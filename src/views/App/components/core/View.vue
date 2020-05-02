@@ -1,8 +1,8 @@
 <template>
   <v-content>
-    <breadcrumb/>
+    <core-breadcrumb/>
     <router-view />
-    <dashboard-core-footer />
+    <core-footer />
   </v-content>
 </template>
 
@@ -11,8 +11,8 @@ export default {
   name: "DashboardCoreView",
 
   components: {
-    DashboardCoreFooter: () => import("./Footer"),
-    Breadcrumb: () => import("./Breadcrumb"),
+    CoreFooter: () => import("./Footer"),
+    CoreBreadcrumb: () => import("./Breadcrumb"),
   },
   computed: {
     appBgColor() {

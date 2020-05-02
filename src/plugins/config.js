@@ -40,7 +40,8 @@ export const LocalStorage = {
     LANGUGE: `${AppPrefix}_languge`,
     THEME: `${AppPrefix}_theme`,
 }
-export const DefaultApiEndpoint = PoroductionMode ? 'https://demo.appedr.com/grand-center' : 'http://localhost/grandats_project/grand-center';
+// export const DefaultApiEndpoint = PoroductionMode ? 'https://demo.appedr.com/grand-center' : 'http://localhost/grandats_project/grand-center';
+export const DefaultApiEndpoint = 'https://jsonplaceholder.typicode.com';
 export const ApiClient = 'default';
 export const DefaultAxiosHeader = {
     'Accept': 'application/json',
