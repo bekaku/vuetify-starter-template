@@ -59,6 +59,22 @@
             </v-row>
             <v-divider class="my-4" />
             <strong class="mb-3 d-inline-block">Sidebar</strong>
+              <v-row
+            >
+              <v-col cols="auto">
+                Sidebar Dark
+              </v-col>
+
+              <v-spacer />
+
+              <v-col cols="auto">
+                <v-switch
+                  v-model="themeSettings.barDark"
+                  class="ma-0 pa-0"
+                  hide-details
+                />
+              </v-col>
+            </v-row>
             <v-row
             >
               <v-col cols="auto">
@@ -75,22 +91,7 @@
                 />
               </v-col>
             </v-row>
-            <v-row
-            >
-              <v-col cols="auto">
-                Sidebar Dark
-              </v-col>
-
-              <v-spacer />
-
-              <v-col cols="auto">
-                <v-switch
-                  v-model="themeSettings.barDark"
-                  class="ma-0 pa-0"
-                  hide-details
-                />
-              </v-col>
-            </v-row>
+          
             <v-row
             >
               <v-col cols="auto">

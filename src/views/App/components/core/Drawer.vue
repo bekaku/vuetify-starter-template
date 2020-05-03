@@ -43,8 +43,8 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>Application</v-list-item-title>
-          <v-list-item-subtitle>Subtext</v-list-item-subtitle>
+          <v-list-item-title>{{$t('app.name')}}</v-list-item-title>
+          <v-list-item-subtitle>{{$t('app.fullName')}}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -117,7 +117,7 @@
       </div>
     </v-list>
 
-    <template v-slot:append>
+    <template v-slot:append v-if="!currentTheme.barExpandOnHover">
       <v-row no-gutters class="my-5">
         <v-col cols="8" class="pl-1"
           ><v-text-field

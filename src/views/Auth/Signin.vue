@@ -115,12 +115,21 @@
                       to="/auth/signup"
                       >{{ $t("authen.createAccount") }}</v-btn
                     >
-                    <v-btn
+                    <!-- <v-btn
                       type="submit"
-                      class="primary"
+                      color="primary"
                       depressed
                       v-text="$t('authen.login')"
-                    ></v-btn>
+                    ></v-btn>z-->
+                    <v-btn
+                      type="submit"
+                      :loading="loading"
+                      :disabled="loading"
+                      color="primary"
+                      depressed
+                    >
+                      {{ $t("authen.login") }}
+                    </v-btn>
                   </div>
                 </form>
               </validation-observer>
@@ -139,21 +148,65 @@
 </template>
 
 <script>
+const axios = require("axios");
+import { vLog } from "@/plugins/util";
+import { mapActions, mapGetters } from "vuex";
+import {
+  LOGIN_STATE,
+  ACTION_SIGN_IN,
+  ACTION_SIGN_OUT
+} from "@/store/storeConfig";
 export default {
   name: "SignIn",
   components: {
     CoreFooter: () => import("@/views/App/components/core/Footer")
   },
   data: () => ({
-    email: "",
-    password: "",
+    email: "beka@email.com",
+    password: "passw0rd",
     showPwd: false,
-    backgroudBg: false
+    backgroudBg: false,
+    loading: false
   }),
+  computed: {
+    ...mapGetters({
+      loginState: LOGIN_STATE
+    })
+  },
+  beforeMount () {
+    this.logoutStore();
+  },
   methods: {
-    signin() {
+    ...mapActions({
+      loginStore: ACTION_SIGN_IN,
+      logoutStore: ACTION_SIGN_OUT
+    }),
+    async signin() {
       console.log("hello");
-      this.$router.push(`/`);
+      const self = this;
+      self.loading = true;
+      let data = undefined;
+      try {
+        data = await axios
+          .get(`https://randomuser.me/api/`)
+          .then(result => result.data);
+        if (data) {
+          const userData = data.results[0];
+          self.loginStore(userData);
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+      self.loading = false;
+      vLog(data);
+    }
+  },
+  watch: {
+    loginState(state) {
+      if (state) {
+        const self = this;
+        self.$router.push(`/`);
+      }
     }
   }
 };

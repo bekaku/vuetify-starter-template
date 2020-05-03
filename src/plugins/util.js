@@ -53,7 +53,12 @@ export const isEmail = (email) => {
 export const getCurrentTheme = () => {
     return localStorage.getItem(LocalStorage.THEME) ? JSON.parse(localStorage.getItem(LocalStorage.THEME)) : DefaultTheme;
 };
-
+export const getCurrentUser = () => {
+    return new Promise(resolve => {
+        const userData = localStorage.getItem(LocalStorage.USER) != null ? JSON.parse(localStorage.getItem(LocalStorage.USER)) : null;
+        resolve(userData);
+    })
+};
 export const convertToLink = (inputText, isWhite) => {
 
     const color = isWhite ? 'text-color-white v-link-underline' : '';
@@ -76,12 +81,6 @@ export const roundDecimal = (value, precision) => {
     const multiplier = Math.pow(10, precision);
     return Math.round(value * multiplier) / multiplier;
 }
-export const getCurrentUser = () => {
-    return new Promise(resolve => {
-        const userData = localStorage.getItem(LocalStorage.USER) != null ? JSON.parse(localStorage.getItem(LocalStorage.USER)) : null;
-        resolve(userData);
-    })
-};
 export const getCurrentLocale = () => {
     return (localStorage.getItem(LocalStorage.LANGUGE) && LocaleOptions.filter(x => x.id == localStorage.getItem(LocalStorage.LANGUGE)).length > 0) ? localStorage.getItem(LocalStorage.LANGUGE) : DefaultLocale
 }

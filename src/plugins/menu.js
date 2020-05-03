@@ -27,7 +27,7 @@ export const AppMenus = () => {
                             title: "Signin",
                             i18n: false,
                             icon: "mdi-login",
-                            to: "/auth/login"
+                            to: "/auth/signin"
                         },
                         {
                             icon: "mdi-account",

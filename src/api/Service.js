@@ -7,7 +7,8 @@ export default class Service {
     async getUserTokenKey(){
         const currentUser = await getCurrentUser();
         return new Promise(resove => {
-            resove(currentUser ? `key=${currentUser.userData.api_key}` : '');
+            // resove(currentUser ? `Bearer ${currentUser.userData.api_key}` : '');
+            resove(currentUser ? `Bearer your_jwt_token` : '');
         })
     }
 

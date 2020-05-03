@@ -126,8 +126,8 @@
         <v-btn icon v-on="on" class="mr-5">
           <v-avatar depressed size="36px">
             <img
-              src="https://scontent.fbkk8-3.fna.fbcdn.net/v/t1.0-9/s960x960/93841626_3211504378913659_8368286881930018816_o.jpg?_nc_cat=111&_nc_sid=85a577&_nc_eui2=AeEgZaAfNvIPNGSsg7XojvQpQWFwliA533VBYXCWIDnfddcJOyVLT3z4K36dd6zT1XbI4n4M9OYfU5ev3-C86Lwa&_nc_ohc=l6kjpuLUPc8AX_oiFs-&_nc_ht=scontent.fbkk8-3.fna&_nc_tp=7&oh=d07f410957c7e0b61fab785a1a8bdce2&oe=5ECD414A"
-              alt="John"
+              :src="currentUser.picture.thumbnail"
+              :alt="currentUser.name.first"
             />
           </v-avatar>
         </v-btn>
@@ -137,31 +137,29 @@
         <v-list-item>
           <v-list-item-avatar>
             <img
-              :src="
-                `https://scontent.fbkk8-3.fna.fbcdn.net/v/t1.0-9/s960x960/93841626_3211504378913659_8368286881930018816_o.jpg?_nc_cat=111&_nc_sid=85a577&_nc_eui2=AeEgZaAfNvIPNGSsg7XojvQpQWFwliA533VBYXCWIDnfddcJOyVLT3z4K36dd6zT1XbI4n4M9OYfU5ev3-C86Lwa&_nc_ohc=l6kjpuLUPc8AX_oiFs-&_nc_ht=scontent.fbkk8-3.fna&_nc_tp=7&oh=d07f410957c7e0b61fab785a1a8bdce2&oe=5ECD414A`
-              "
+              :src="currentUser.picture.thumbnail"
             />
           </v-list-item-avatar>
 
           <v-list-item-content>
-            <v-list-item-title>Tech Reagan</v-list-item-title>
-            <v-list-item-subtitle>techreagan@gmail.com</v-list-item-subtitle>
+            <v-list-item-title>{{`${currentUser.name.title} ${currentUser.name.first} ${currentUser.name.last}`}}</v-list-item-title>
+            <v-list-item-subtitle>{{currentUser.email}}</v-list-item-subtitle>
           </v-list-item-content>
         </v-list-item>
         <v-divider></v-divider>
-        <v-list-item router to="/channels/10">
+        <v-list-item router to="/profile">
           <v-list-item-icon>
-            <v-icon>mdi-account-box</v-icon>
+            <v-icon>mdi-account</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>Your channel</v-list-item-title>
+          <v-list-item-title>Profile</v-list-item-title>
         </v-list-item>
-        <v-list-item router to="/studio">
+        <v-list-item router to="/setting">
           <v-list-item-icon>
-            <v-icon>mdi-youtube-studio</v-icon>
+            <v-icon>mdi-cog</v-icon>
           </v-list-item-icon>
-          <v-list-item-title>VueTube Studio</v-list-item-title>
+          <v-list-item-title>Setting</v-list-item-title>
         </v-list-item>
-        <v-list-item router to="/signin">
+        <v-list-item router to="/auth/signin">
           <v-list-item-icon>
             <v-icon>mdi-login-variant</v-icon>
           </v-list-item-icon>
@@ -187,7 +185,7 @@
 import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
 import { LocaleOptions } from "@/plugins/config";
 import { getCurrentTheme } from "@/plugins/util";
-import { CURRENT_LANGUGE, ACTION_SET_LANG, THEME } from "@/store/storeConfig";
+import { CURRENT_LANGUGE, ACTION_SET_LANG, THEME, CURRENT_USER } from "@/store/storeConfig";
 export default {
   name: "DashboardCoreAppBar",
 
@@ -215,7 +213,8 @@ export default {
     ...mapState(["drawer"]),
     ...mapGetters({
       currentLanguge: CURRENT_LANGUGE,
-      theme: THEME
+      theme: THEME,
+      currentUser : CURRENT_USER
     }),
     currentTheme() {
       return this.theme ? this.theme : getCurrentTheme();
