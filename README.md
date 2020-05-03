@@ -22,11 +22,6 @@ App will be opened in browser at `http://localhost:8080/`
 
 ### 4. Build app for production
 
-```
-npm run build-prod
-npm run build
-```
-``` bash
 # install dependencies
 npm install
 
