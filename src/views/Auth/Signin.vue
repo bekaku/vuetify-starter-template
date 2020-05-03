@@ -162,8 +162,8 @@ export default {
     CoreFooter: () => import("@/views/App/components/core/Footer")
   },
   data: () => ({
-    email: "beka@email.com",
-    password: "passw0rd",
+    email: "",
+    password: "",
     showPwd: false,
     backgroudBg: false,
     loading: false

@@ -83,19 +83,15 @@ export default {
     links: [
       {
         href: "#",
-        text: "Creative Tim"
-      },
-      {
-        href: "#",
         text: "About Us"
       },
       {
         href: "#",
-        text: "Blog"
+        text: "News"
       },
       {
         href: "#",
-        text: "Licenses"
+        text: "Blog"
       }
     ]
   }),
