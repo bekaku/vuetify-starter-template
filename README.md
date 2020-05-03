@@ -14,25 +14,18 @@ npm install
 ```
 
 ### 3. Run the app
-
 ```
 npm run dev
 ```
 App will be opened in browser at `http://localhost:8080/`
 
 ### 4. Build app for production
-
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
+```
 `npm run build` to build your app for production
 `npm run lint` to run linting.
+```
 
-
+### 5. Plugin
 ## Vuetify
 Vuetify is developed exactly according to Material Design spec. Every component is hand crafted to bring you the best possible UI tools to your next great app. The development doesn't stop at the core components outlined in Google's spec. Through the support of community members and sponsors, additional components will be designed and made available for everyone to enjoy.
 
