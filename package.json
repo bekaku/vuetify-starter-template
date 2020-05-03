@@ -1,6 +1,6 @@
 {
-  "name": "vuetify-material-dashboard",
-  "version": "2.1.0",
+  "name": "vee-theme",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve --open",
