@@ -65,9 +65,9 @@
 
       <v-list :tile="false">
         <v-list-item
-          v-for="(l, i) in localeOptions"
+          v-for="(l, i) in LocaleOptions"
           :key="`lacales-${i}`"
-          @click="setLanguge(l.id)"
+          @click="updateLocale(l.id)"
         >
           <v-list-item-title v-text="l.name" />
           <v-list-item-icon>
@@ -181,8 +181,17 @@
 </template>
 
 <script>
-import useSiteSetting from "@/composition/UseSiteSetting";
-import { defineComponent, ref } from "@vue/composition-api";
+// Utilities
+import { mapState, mapMutations, mapGetters, mapActions } from "vuex";
+import { LocaleOptions } from "@/plugins/config";
+import { getCurrentTheme } from "@/plugins/util";
+import {
+  CURRENT_LANGUGE,
+  ACTION_SET_LANG,
+  THEME,
+  CURRENT_USER
+} from "@/store/const";
+import { defineComponent } from "@vue/composition-api";
 export default defineComponent({
   name: "CoreAppBar",
 
@@ -194,35 +203,43 @@ export default defineComponent({
       default: false
     }
   },
-  setup(props, { root }) {
-    const {
-      localeOptions,
-      currentTheme,
-      currentLanguge,
-      drawer,
-      currentUser,
-      setLanguge,
-      setDrawer
-    } = useSiteSetting(root);
-    const notifications = ref([
+
+  data: () => ({
+    LocaleOptions,
+    notifications: [
       "Mike John Responded to your email",
       "You have 5 new tasks",
       "You're now friends with Andrew",
       "Another Notification",
       "Another one"
-    ]);
+    ]
+  }),
 
-    return {
-      currentTheme,
-      currentLanguge,
-      drawer,
-      localeOptions,
-      currentUser,
-      setLanguge,
-      setDrawer,
+  computed: {
+    ...mapState(["drawer"]),
+    ...mapGetters({
+      currentLanguge: CURRENT_LANGUGE,
+      theme: THEME,
+      currentUser: CURRENT_USER
+    }),
+    currentTheme() {
+      return this.theme ? this.theme : getCurrentTheme();
+    }
+  },
 
-      notifications
-    };
+  methods: {
+    ...mapMutations({
+      setDrawer: "SET_DRAWER"
+    }),
+    ...mapActions({
+      setLang: ACTION_SET_LANG
+    }),
+    updateLocale(locale) {
+      const currentLocale = this.$i18n.locale;
+      if (currentLocale != locale) {
+        this.setLang(locale);
+      }
+    }
   }
 });
 </script>

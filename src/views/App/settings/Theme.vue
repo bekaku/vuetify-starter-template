@@ -208,7 +208,7 @@
 // Mixins
 import { mapActions, mapGetters } from "vuex";
 import { ThemeColors } from "@/plugins/config";
-import { ACTION_SET_THEME, THEME } from "@/store/storeConfig";
+import { ACTION_SET_THEME, THEME } from "@/store/const";
 import { getCurrentTheme } from "@/plugins/util";
 import Proxyable from "vuetify/lib/mixins/proxyable";
 export default {

@@ -148,7 +148,7 @@ import { mapGetters } from "vuex";
 // import  i18n  from '@/plugins/i18n';
 import { getCurrentTheme } from "@/plugins/util";
 import { AppMenus } from "@/plugins/menu";
-import { THEME } from "@/store/storeConfig";
+import { THEME } from "@/store/const";
 export default {
   name: "DashboardCoreDrawer",
   data: () => ({}),

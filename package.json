@@ -1,6 +1,6 @@
 {
-  "name": "vuetify-material-dashboard",
-  "version": "2.1.0",
+  "name": "vuetify-starter-composition-api-template",
+  "version": "1.0.0",
   "private": true,
   "scripts": {
     "dev": "vue-cli-service serve --open",
@@ -13,6 +13,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@vue/composition-api": "^0.5.0",
     "axios": "^0.19.2",
     "core-js": "^3.6.5",
     "js-sha512": "^0.8.0",

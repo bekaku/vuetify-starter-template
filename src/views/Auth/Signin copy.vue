@@ -57,7 +57,6 @@
               }}</v-card-subtitle
             >
             <v-card-text>
-              <p>{{ "loginState : " + loginState }}</p>
               <validation-observer ref="form" v-slot="{ handleSubmit, reset }">
                 <form
                   @submit.prevent="handleSubmit(signin)"
@@ -69,7 +68,7 @@
                     rules="required|email"
                   >
                     <v-text-field
-                      v-model="state.email"
+                      v-model="email"
                       :error-messages="errors"
                       :label="$t('base.email')"
                       filled
@@ -93,16 +92,14 @@
                       >
                     </p>
                     <v-text-field
-                      v-model="state.password"
+                      v-model="password"
                       :append-icon="
-                        state.showPwd
-                          ? 'mdi-eye-outline'
-                          : 'mdi-eye-off-outline'
+                        showPwd ? 'mdi-eye-outline' : 'mdi-eye-off-outline'
                       "
-                      :type="state.showPwd ? 'text' : 'password'"
+                      :type="showPwd ? 'text' : 'password'"
                       :error-messages="errors"
                       :label="$t('authen.password')"
-                      @click:append="state.showPwd = !state.showPwd"
+                      @click:append="showPwd = !showPwd"
                       filled
                       rounded
                       prepend-inner-icon="mdi-key-outline"
@@ -145,7 +142,7 @@
       :dark="backgroudBg ? true : false"
       :bg="'transparent'"
       :absolute="true"
-      :show-to-top="true"
+      :show-to-top="false"
     />
   </div>
 </template>
@@ -153,17 +150,9 @@
 <script>
 const axios = require("axios");
 import { vLog } from "@/plugins/util";
+import { mapActions, mapGetters } from "vuex";
 import {
-  reactive,
-  ref,
-  computed,
-  // watch,
-  watchEffect,
-  onMounted,
-  onUnmounted
-} from "@vue/composition-api";
-import {
-  // MUTATE_SET_LOGIN_STATE,
+  LOGIN_STATE,
   ACTION_SIGN_IN,
   ACTION_SIGN_OUT
 } from "@/store/const";
@@ -172,57 +161,30 @@ export default {
   components: {
     CoreFooter: () => import("@/views/App/components/core/Footer")
   },
-  setup(props, {root}) {
-  // setup(props, context) {
-    const { $store, $router, $i18n } = root;
-
-    // State
-    const state = reactive({
-      email: "sdcdcd@gaami.com",
-      password: "222222222222",
-      showPwd: false
-      // loginState: computed(() => context.root.$store.state.user.loginState)
-    });
-    // const loginState = computed({
-    //   get: () => $store.state.user.loginState
-    // });
-    const loginState = computed(() => $store.state.user.loginState);
-    watchEffect(() => {
-      if (loginState.value) {
-        console.log("loginState OK  ");
-        $router.push(`/`);
-      }
-    });
-
-    // const email = ref(null);
-    // const password = ref(null);
-    // const showPwd = ref(false);
-    const backgroudBg = ref(false);
-    const loading = ref(false);
-
-    // Computed props
-    // const formattedMoney = computed(() => money.value.toFixed(2));
-
-    // Hooks
-    // onMounted(() => console.log("Clock Object mounted"));
-    onMounted(() => {
-      console.log("mounted! " + $i18n.tc("app.fullName"));
-      // console.log($store);
-      // console.log(context.root.$store);
-      //logout
-      $store.dispatch(ACTION_SIGN_OUT);
-    });
-    onUnmounted(() => {
-      console.log("unmounted!");
-    });
-
-    // Methods
-    // const add = () => (money.value += Number(delta.value));
-
-    const signin = async () => {
-      console.log("email : " + state.email + ", pwd : " + state.password);
-
-      loading.value = true;
+  data: () => ({
+    email: "",
+    password: "",
+    showPwd: false,
+    backgroudBg: false,
+    loading: false
+  }),
+  computed: {
+    ...mapGetters({
+      loginState: LOGIN_STATE
+    })
+  },
+  beforeMount () {
+    this.logoutStore();
+  },
+  methods: {
+    ...mapActions({
+      loginStore: ACTION_SIGN_IN,
+      logoutStore: ACTION_SIGN_OUT
+    }),
+    async signin() {
+      console.log("hello");
+      const self = this;
+      self.loading = true;
       let data = undefined;
       try {
         data = await axios
@@ -230,29 +192,22 @@ export default {
           .then(result => result.data);
         if (data) {
           const userData = data.results[0];
-          // $store.commit(MUTATE_SET_LOGIN_STATE, true);
-          $store.dispatch(ACTION_SIGN_IN, userData);
-          vLog(userData);
+          self.loginStore(userData);
         }
       } catch (error) {
         console.log(error.message);
       }
-      loading.value = false;
+      self.loading = false;
       vLog(data);
-    };
-
-    // Watchers
-    // const moneyWatch = watch(money, (newVal, oldVal) =>
-    //   console.log("Money changed", newVal, oldVal)
-    // );
-
-    return {
-      loginState,
-      state,
-      backgroudBg,
-      loading,
-      signin
-    };
+    }
+  },
+  watch: {
+    loginState(state) {
+      if (state) {
+        const self = this;
+        self.$router.push(`/`);
+      }
+    }
   }
 };
 </script>

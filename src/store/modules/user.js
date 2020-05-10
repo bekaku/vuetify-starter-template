@@ -9,7 +9,7 @@ import {
   ACTION_SET_USER,
   ACTION_SIGN_IN,
   ACTION_SIGN_OUT
-} from "../storeConfig";
+} from "../const";
 export default {
   state: {
     currentUser:
@@ -47,6 +47,7 @@ export default {
     [ACTION_SIGN_OUT]: ({ commit }) => {
       localStorage.removeItem(LocalStorage.USER);
       commit(MUTATE_SET_LOGOUT_STATE, false);
+      commit(MUTATE_SET_LOGIN_STATE, false);
       commit(MUTATE_SET_USER, null);
       setTimeout(() => {
         commit(MUTATE_SET_LOGOUT_STATE, true);

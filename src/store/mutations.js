@@ -1,4 +1,4 @@
-import { MUTATE_CHANGE_LANG, MUTATE_SET_THEME } from './storeConfig';
+import { MUTATE_CHANGE_LANG, MUTATE_SET_THEME } from './const';
 import { LocalStorage } from '../plugins/config'
 import app from '../main';
 const mutations = {
