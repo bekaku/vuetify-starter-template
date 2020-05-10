@@ -43,8 +43,8 @@
         </v-list-item-avatar>
 
         <v-list-item-content>
-          <v-list-item-title>{{$t('app.name')}}</v-list-item-title>
-          <v-list-item-subtitle>{{$t('app.fullName')}}</v-list-item-subtitle>
+          <v-list-item-title>{{ $t("app.name") }}</v-list-item-title>
+          <v-list-item-subtitle>{{ $t("app.fullName") }}</v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
 
@@ -84,9 +84,7 @@
                 </v-list-item-action>
                 <v-list-item-content>
                   <v-list-item-title>
-                    {{
-                      subItem.i18n ? $t(subItem.title) : subItem.title
-                    }}
+                    {{ subItem.i18n ? $t(subItem.title) : subItem.title }}
                   </v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
@@ -143,53 +141,23 @@
 </template>
 
 <script>
-// Utilities
-import { mapGetters } from "vuex";
-// import  i18n  from '@/plugins/i18n';
-import { getCurrentTheme } from "@/plugins/util";
-import { AppMenus } from "@/plugins/menu";
-import { THEME } from "@/store/const";
-export default {
-  name: "DashboardCoreDrawer",
-  data: () => ({}),
-
-  computed: {
-    ...mapGetters({
-      theme: THEME
-    }),
-    currentTheme() {
-      return this.theme ? this.theme : getCurrentTheme();
-    },
-    drawer: {
-      get() {
-        return this.$store.state.drawer;
-      },
-      set(val) {
-        this.$store.commit("SET_DRAWER", val);
+import useSiteSetting from "@/composition/UseSiteSetting";
+import useMenuApi from "@/composition/UseMenuApi";
+import { defineComponent, computed } from "@vue/composition-api";
+export default defineComponent({
+  name: "CoreDrawer",
+  setup(props, { root }) {
+    const { $store } = root;
+    const { currentTheme, setDrawer } = useSiteSetting(root);
+    const { responseMenus } = useMenuApi();
+    const drawer = computed({
+      get: () => $store.state.drawer,
+      set: val => {
+        setDrawer(val);
       }
-    },
-    computedItems() {
-      return this.items.map(this.mapItem);
-    },
-    profile() {
-      return {
-        avatar: true,
-        title: this.$t("avatar")
-      };
-    },
-    menuItems() {
-      return AppMenus();
-    }
-  },
+    });
 
-  methods: {
-    mapItem(item) {
-      return {
-        ...item,
-        children: item.children ? item.children.map(this.mapItem) : undefined,
-        title: this.$t(item.title)
-      };
-    }
+    return { currentTheme, drawer, menuItems: responseMenus };
   }
-};
+});
 </script>

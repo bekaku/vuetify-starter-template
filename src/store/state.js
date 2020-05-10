@@ -1,7 +1,7 @@
 
 import { LocalStorage, DefaultLocale } from '../plugins/config'
 const state = {
-    drawer: null,
+    drawer: true,
     currentLanguge: localStorage.getItem(LocalStorage.LANGUGE) ? localStorage.getItem(LocalStorage.LANGUGE) : DefaultLocale,
     currentTheme: undefined,
 }

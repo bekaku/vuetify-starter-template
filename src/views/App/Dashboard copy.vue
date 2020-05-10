@@ -1,6 +1,6 @@
 <template>
   <v-container id="dashboard" fluid tag="section">
-    <v-row v-if="loading">
+    <v-row v-if="isLoading">
       <v-col cols="6" v-for="n in 12" :key="`sketlon-${n}`">
         <v-skeleton-loader
           ref="skeleton"
@@ -48,38 +48,56 @@
 </template>
 
 <script>
-import { vLog } from "@/plugins/util";
+// import { vLog } from "@/plugins/util";
 //service
-import UsersService from "@/api/UsersService";
-import { onBeforeMount, reactive, toRefs, ref } from "@vue/composition-api";
+// import PostService from "@/api/PostService";
+// const postService = new PostService();
+import { onBeforeMount, reactive, toRefs } from "@vue/composition-api";
+import userApi from "@/api/UsersApi";
 
 export default {
   name: "Dashboard",
-  // setup(props, { root }) {
-  setup() {
-    const usersService = new UsersService();
-    let state = reactive({ data: null, error: null, loading: false });
-    const page = ref(1);
+  setup(props, { root }) {
+    // const dataList = ref([]);
+    // const isLoading = ref(false);
+
+    let state = reactive({ data: null, error: null, isLoading: false });
 
     onBeforeMount(() => {
-      fetchData();
+      // fetchData();
+      // getUsers(1);
+
+      fetchData(1);
     });
 
-    const fetchData = async () => {
-      state.loading = true;
-      const data = await usersService.getUsers(page);
-      vLog(data);
-      state.data = data.response;
-      state.loading = false;
+    const { response, error, loading, getUsers, getUserSingle } = userApi(root);
+
+    const fetchData = async page => {
+      state.isLoading = loading;
+      getUsers(page);
+      state.data = response;
+      state.isLoading = false;
+      state.error = error;
     };
 
     const onSelectItem = async id => {
       console.log("onSelectItem : " + id);
-      const data = await usersService.getUserById(id);
-      vLog(data);
+      getUserSingle(id);
+      console.log(response);
     };
 
-    return { ...toRefs(state), onSelectItem };
+    return {
+      ...toRefs(state),
+      onSelectItem
+    };
+    // const fetchData = async () => {
+    //   loading.value = true;
+    //   const data = await postService.getUsers();
+    //   vLog(data.response);
+    //   data.value = data.response
+    //   loading.value = false;
+    // };
+    // return { data, loading };
   }
 };
 </script>

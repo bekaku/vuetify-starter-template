@@ -42,7 +42,7 @@ export const LocalStorage = {
   THEME: `${AppPrefix}_theme`
 };
 // export const DefaultApiEndpoint = PoroductionMode ? 'https://api.server.com/api' : 'http://localhost/api';
-export const DefaultApiEndpoint = "https://jsonplaceholder.typicode.com";
+export const DefaultApiEndpoint = "https://reqres.in/api";
 export const ApiClient = "default";
 export const DefaultAxiosHeader = {
   Accept: "application/json",

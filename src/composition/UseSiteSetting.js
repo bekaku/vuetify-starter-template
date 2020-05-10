@@ -24,8 +24,6 @@ export default function(contextRoot) {
       $store.dispatch(ACTION_SET_LANG, lang);
     }
   };
-
   const setDrawer = drawer => $store.commit("SET_DRAWER", drawer);
-
   return { ...toRefs(state), setLanguge, setDrawer };
 }
