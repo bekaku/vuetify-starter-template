@@ -1,7 +1,7 @@
 import { DefaultAxios, MultipartAxios, AxiosMethod } from "../plugins/config";
 import { getCurrentUser, vConsole, isJson } from "../plugins/util";
 export default class Service {
-  constructor() {}
+  constructor() { }
   async getUserTokenKey() {
     const currentUser = await getCurrentUser();
     return new Promise(resove => {

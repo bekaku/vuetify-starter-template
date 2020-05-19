@@ -20,20 +20,7 @@
       <v-btn icon>
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
-
-      <v-menu left bottom>
-        <template v-slot:activator="{ on }">
-          <v-btn icon v-on="on" class="mr-2">
-            <v-icon>mdi-translate</v-icon>EN
-          </v-btn>
-        </template>
-
-        <v-list>
-          <v-list-item v-for="n in 5" :key="n" @click="() => {}">
-            <v-list-item-title>Option {{ n }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-menu>
+      <core-locale />
       <v-switch
         v-model="backgroudBg"
         color="primary"
@@ -43,22 +30,35 @@
       />
     </v-app-bar>
 
-    <v-container :class="backgroudBg ? 'login' : ''" fluid class="fill-height">
+    <v-container
+      :class="backgroudBg ? 'login' : ''"
+      fluid
+      class="fill-height"
+    >
       <v-row>
-        <v-col cols="12" xs="12" sm="6" md="5" lg="4" class="ma-auto">
-          <v-card class="px-8 pt-6 pb-12" elevation="0">
+        <v-col
+          cols="12"
+          xs="12"
+          sm="6"
+          md="5"
+          lg="4"
+          class="ma-auto"
+        >
+          <v-card
+            class="px-8 pt-6 pb-12"
+            elevation="0"
+          >
             <v-card-title class="text-center font-weight-black">{{
               $t("app.name")
             }}</v-card-title>
-            <v-card-subtitle
-              class="mb-1 mt-1 subtitle-2 grey--text text--lighten-1"
-              >{{
+            <v-card-subtitle class="mb-1 mt-1 subtitle-2 grey--text text--lighten-1">{{
                 $t("helper.loginToSystem", [$t("app.name")])
-              }}</v-card-subtitle
-            >
+              }}</v-card-subtitle>
             <v-card-text>
-              <p>{{ "loginState : " + loginState }}</p>
-              <validation-observer ref="form" v-slot="{ handleSubmit, reset }">
+              <validation-observer
+                ref="form"
+                v-slot="{ handleSubmit, reset }"
+              >
                 <form
                   @submit.prevent="handleSubmit(signin)"
                   @reset.prevent="reset"
@@ -89,8 +89,7 @@
                         class="text-capitalize"
                         color="primary"
                         to="/auth/forgot"
-                        >{{ $t("authen.forgetPassword") }}</v-btn
-                      >
+                      >{{ $t("authen.forgetPassword") }}</v-btn>
                     </p>
                     <v-text-field
                       v-model="state.password"
@@ -116,8 +115,7 @@
                       color="primary"
                       router
                       to="/auth/signup"
-                      >{{ $t("authen.createAccount") }}</v-btn
-                    >
+                    >{{ $t("authen.createAccount") }}</v-btn>
                     <!-- <v-btn
                       type="submit"
                       color="primary"
@@ -170,16 +168,17 @@ import {
 export default {
   name: "SignIn",
   components: {
-    CoreFooter: () => import("@/views/App/components/core/Footer")
+    CoreFooter: () => import("@/views/App/components/core/Footer"),
+    CoreLocale: () => import("@/views/App/components/core/Locale")
   },
-  setup(props, {root}) {
-  // setup(props, context) {
+  setup(props, { root }) {
+    // setup(props, context) {
     const { $store, $router, $i18n } = root;
 
     // State
     const state = reactive({
-      email: "sdcdcd@gaami.com",
-      password: "222222222222",
+      email: "",
+      password: "",
       showPwd: false
       // loginState: computed(() => context.root.$store.state.user.loginState)
     });

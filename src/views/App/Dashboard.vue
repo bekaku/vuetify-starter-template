@@ -67,9 +67,12 @@ export default {
 
     const fetchData = async () => {
       state.loading = true;
-      const data = await usersService.getUsers(page);
-      vLog(data);
-      state.data = data.response;
+      const {response, error} = await usersService.getUsers(page);
+      vLog(response);
+      if(error){
+        vLog(error)
+      }
+      // state.data = response;
       state.loading = false;
     };
 

@@ -6,7 +6,7 @@ export default function() {
     fetching: false
   });
 
-  //to be update fetch acl menu fromt server
+  //to be update fetch acl menu from server
   state.responseMenus = [
     {
       header: "Sub Header",
@@ -18,86 +18,86 @@ export default function() {
           i18n: true,
           to: "/"
         },
-        //Authenthication
+        //Pages
         {
-          title: "Pages",
-          i18n: false,
+          title: "nav.pages",
+          i18n: true,
           icon: "mdi-page-layout-sidebar-left",
           items: [
             {
-              title: "Error404",
-              i18n: false,
+              title: "nav.errors404",
+              i18n: true,
               icon: "mdi-emoticon-sad",
               to: "/exception/error-404"
             },
             {
-              title: "Signin",
-              i18n: false,
+              title: "authen.login",
+              i18n: true,
               icon: "mdi-login",
               to: "/auth/signin"
             },
             {
               icon: "mdi-account",
-              title: "User",
-              i18n: false,
+              title: "nav.user",
+              i18n: true,
               to: "/pages/user"
             }
           ]
         },
         //Components
         {
-          title: "Components",
-          i18n: false,
+          title: "nav.components",
+          i18n: true,
           icon: "mdi-view-dashboard",
           items: [
             {
-              title: "buttons",
-              i18n: false,
+              title: "nav.buttons",
+              i18n: true,
               icon: "mdi-minus",
               to: "/components/buttons"
             },
             {
-              title: "grids",
-              i18n: false,
+              title: "nav.grids",
+              i18n: true,
               icon: "mdi-grid",
               to: "/components/grids"
             },
             {
-              title: "icons",
-              i18n: false,
+              title: "nav.icons",
+              i18n: true,
               icon: "mdi-chart-bubble",
               to: "/components/icons"
             },
 
             {
-              title: "notifications",
-              i18n: false,
+              title: "nav.notifications",
+              i18n: true,
               icon: "mdi-bell",
               to: "/components/notifications"
             },
             {
-              title: "rtables",
-              i18n: false,
+              title: "nav.tables",
+              i18n: true,
               icon: "mdi-clipboard-outline",
               to: "/tables/regular-tables"
             },
             {
-              title: "tabs",
-              i18n: false,
+              title: "nav.tabs",
+              i18n: true,
               icon: "mdi-tab",
               to: "/components/tabs"
             },
             {
-              title: "typography",
-              i18n: false,
+              title: "nav.typography",
+              i18n: true,
               icon: "mdi-format-font",
               to: "/components/typography"
             }
           ]
         },
         {
-          title: "Google map",
-          i18n: false,
+          title: "nav.maps",
+          i18n: true,
           icon: "mdi-map-marker",
           to: "/maps/google-maps"
         },

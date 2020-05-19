@@ -117,7 +117,19 @@
     "profileData": "Profile data",
     "darkMode": "Dark Mode",
     "lightMode": "Light Mode",
-    "themes": "Themes"
+    "themes": "Themes",
+    "pages": "Pages",
+    "errors404": "Error404",
+    "user": "User",
+    "components": "Components",
+    "buttons": "Buttons",
+    "grids": "Grids",
+    "icons": "Icons",
+    "notifications": "Notifications",
+    "tables": "Tables",
+    "tabs": "Tabs",
+    "typography": "Typography",
+    "maps": "Map"
   },
   "error": {
     "emailFormat": "Invalid E-mail address",

@@ -68,7 +68,7 @@
               <template v-slot:activator>
                 <v-list-item-content>
                   <v-list-item-title
-                    v-text="parentItem.title"
+                    v-text="parentItem.i18n ? $t(parentItem.title) : parentItem.title "
                   ></v-list-item-title>
                 </v-list-item-content>
               </template>

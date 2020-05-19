@@ -117,7 +117,19 @@
     "profileData": "ข้อมูลส่วนตัว",
     "darkMode": "โหมดมืด",
     "lightMode": "โหมดสว่าง",
-    "themes": "ธีม"
+    "themes": "ธีม",
+    "pages": "หน้า",
+    "errors404": "ผิดพลาด404",
+    "user": "ผู้ใช้",
+    "components": "คอมโพเน้นท์",
+    "buttons": "ปุ่ม",
+    "grids": "กริด",
+    "icons": "ไอคอน",
+    "notifications": "แจ้งเตือน",
+    "tables": "ตาราง",
+    "tabs": "แท็ป",
+    "typography": "ตัวพิมพ์",
+    "maps": "แผนที่"
   },
   "error": {
     "emailFormat": "อีเมล์ไม่ถูกต้อง",

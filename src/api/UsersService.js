@@ -4,8 +4,8 @@ class UsersService extends Service{
     constructor(){
         super();
     }
-    async getUsers(){
-        return this.callApiGet(`/users?page=1`);
+    async getUsers(page){
+        return this.callApiGet(`/users?page=${page}`);
     }
 
     async getUserById(id){

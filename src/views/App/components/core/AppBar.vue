@@ -49,33 +49,7 @@
     </v-btn>
 
     <!-- Languge  -->
-    <v-menu
-      bottom
-      left
-      offset-y
-      origin="top right"
-      transition="scale-transition"
-    >
-      <template v-slot:activator="{ attrs, on }">
-        <v-btn class="ml-2" min-width="0" icon v-bind="attrs" v-on="on">
-          <v-icon>mdi-translate</v-icon>
-          {{ currentLanguge }}
-        </v-btn>
-      </template>
-
-      <v-list :tile="false">
-        <v-list-item
-          v-for="(l, i) in localeOptions"
-          :key="`lacales-${i}`"
-          @click="setLanguge(l.id)"
-        >
-          <v-list-item-title v-text="l.name" />
-          <v-list-item-icon>
-            <v-icon v-if="currentLanguge == l.id">mdi-check</v-icon>
-          </v-list-item-icon>
-        </v-list-item>
-      </v-list>
-    </v-menu>
+    <core-locale />
     <!-- End  -->
 
     <!-- Notification  -->
@@ -186,7 +160,9 @@ import { defineComponent, ref } from "@vue/composition-api";
 export default defineComponent({
   name: "CoreAppBar",
 
-  components: {},
+  components: {
+    CoreLocale: () => import("@/views/App/components/core/Locale")
+  },
 
   props: {
     value: {
@@ -196,12 +172,9 @@ export default defineComponent({
   },
   setup(props, { root }) {
     const {
-      localeOptions,
       currentTheme,
-      currentLanguge,
       drawer,
       currentUser,
-      setLanguge,
       setDrawer
     } = useSiteSetting(root);
     const notifications = ref([
@@ -214,13 +187,9 @@ export default defineComponent({
 
     return {
       currentTheme,
-      currentLanguge,
       drawer,
-      localeOptions,
       currentUser,
-      setLanguge,
       setDrawer,
-
       notifications
     };
   }
