@@ -2,7 +2,7 @@
 
 ### 1. Download this repository
 ```
-git clone https://github.com/bekaku/vuetify-starter-template my-app
+git clone https://github.com/bekaku/vuetify-starter-template.git my-app
 ```
 Repository will be downloaded into `my-app/` folder
 
