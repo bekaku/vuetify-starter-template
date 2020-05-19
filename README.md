@@ -6,7 +6,7 @@ git clone https://github.com/bekaku/vuetify-starter-template.git my-app
 ```
 Repository will be downloaded into `my-app/` folder
 
-### 2. Instal dependencies
+### 2. Install dependencies
 
 Go to the downloaded repository folder and run:
 ```
