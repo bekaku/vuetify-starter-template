@@ -173,7 +173,7 @@ export default {
   },
   setup(props, { root }) {
     // setup(props, context) {
-    const { $store, $router, $i18n } = root;
+    const { $store, $router, $i18n } = root;//https://composition-api.vuejs.org/api.html#setup
 
     // State
     const state = reactive({
